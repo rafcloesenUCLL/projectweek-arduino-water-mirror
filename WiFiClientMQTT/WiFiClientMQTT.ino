@@ -30,10 +30,14 @@
 /* https://cfbru8.internetofthings.ibmcloud.com/dashboard/ */
 /* # Node red dashboard: */
 /* https://ucll-team1.eu-gb.mybluemix.net/ui/#!/0 */
-/* Organization ID: cfbru8 */
-/* Device Type: ESP32 */
-/* Device ID: arduino */
-/* Authentication Method: use-token-auth */
+/* Organization ID: cfbru8
+ */
+/* Device Type: ESP32
+ */
+/* Device ID: arduino
+ */
+/* Authentication Method: use-token-auth
+ */
 /* Authentication Token: oQx@oa5jVACX35lwF& */
 
 #define MQTT_HOST "cfbru8.messaging.internetofthings.ibmcloud.com"
@@ -46,9 +50,9 @@
 
 // Update these with values suitable for your network.
 
-const char* ssid = "ucll-projectweek-IoT"
-const char* password = "Foo4aiHa"
-const char* mqtt_server = MQTT_HOST
+const char* ssid = "ucll-projectweek-IoT";
+const char* password = "Foo4aiHa";
+const char* mqtt_server = MQTT_HOST;
 const int button = 0;
 int buttonState = 0;
 
@@ -62,7 +66,7 @@ void setup() {
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   Serial.begin(115200);
   setup_wifi();
-  client.setServer(mqtt_server, 1883);
+  client.setServer(mqtt_server, MQTT_PORT);
   client.setCallback(callback);
 }
 
@@ -120,11 +124,12 @@ void reconnect() {
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
       // Wait 5 seconds before retrying
-      delay(5000);
+      delay(2000);
     }
   }
 }
 
+int i = 0;
 void loop() {
 
   if (!client.connected()) {
@@ -132,9 +137,14 @@ void loop() {
   }
   client.loop();
 
+    i++;
+    
     Serial.println("Button Pressed");
     String payload = "{ \"d\" : {";
-    payload += "\"Button Pressed\":\""; payload += "True\",";
+    payload += "\"ph-sensor-1\":";
+    String buf = String(i);
+    payload += buf; 
+    payload += ",";
     payload += "\"Local IP\":\""; payload += WiFi.localIP().toString(); payload += "\"";
     payload += "}}";
     Serial.println(payload);
@@ -145,6 +155,11 @@ void loop() {
       Serial.println("Publish failed");
     }
     delay(2000);
+
+    if(i == 14)
+    {
+      i = 0;
+    }
 
   /* buttonState = digitalRead(button); */ 
   /* if (buttonState == HIGH) { */
