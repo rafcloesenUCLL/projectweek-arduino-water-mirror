@@ -30,20 +30,25 @@
 /* https://cfbru8.internetofthings.ibmcloud.com/dashboard/ */
 /* # Node red dashboard: */
 /* https://ucll-team1.eu-gb.mybluemix.net/ui/#!/0 */
+/* Organization ID: cfbru8 */
+/* Device Type: ESP32 */
+/* Device ID: arduino */
+/* Authentication Method: use-token-auth */
+/* Authentication Token: oQx@oa5jVACX35lwF& */
 
 #define MQTT_HOST "cfbru8.messaging.internetofthings.ibmcloud.com"
 #define MQTT_PORT 1883
 #define MQTT_DEVICEID "d:cfbru8:ESP32:arduino"
 #define MQTT_USER "use-token-auth"
-#define MQTT_TOKEN "secrettoken"
+#define MQTT_TOKEN "oQx@oa5jVACX35lwF&"
 #define MQTT_TOPIC "iot-2/evt/status/fmt/json"
 #define MQTT_TOPIC_DISPLAY "iot-2/cmd/update/fmt/json"
 
 // Update these with values suitable for your network.
 
-const char* ssid = ".......";
-const char* password = "........";
-const char* mqtt_server = "<YOURORG>.messaging.internetofthings.ibmcloud.com";
+const char* ssid = "ucll-projectweek-IoT"
+const char* password = "Foo4aiHa"
+const char* mqtt_server = MQTT_HOST
 const int button = 0;
 int buttonState = 0;
 
@@ -127,11 +132,6 @@ void loop() {
   }
   client.loop();
 
-  buttonState = digitalRead(button); 
-  if (buttonState == HIGH) {
-    delay(500);
-  }
-  else {
     Serial.println("Button Pressed");
     String payload = "{ \"d\" : {";
     payload += "\"Button Pressed\":\""; payload += "True\",";
@@ -144,6 +144,12 @@ void loop() {
     } else {
       Serial.println("Publish failed");
     }
-    delay(500);
-   }
+    delay(2000);
+
+  /* buttonState = digitalRead(button); */ 
+  /* if (buttonState == HIGH) { */
+  /*   delay(500); */
+  /* } */
+  /* else { */
+  /*  } */
 }
