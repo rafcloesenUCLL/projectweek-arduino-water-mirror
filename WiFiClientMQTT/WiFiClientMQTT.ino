@@ -25,6 +25,7 @@
 
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include <ArduinoJson.h>
 
 // Watson IoT connection details
 /* https://cfbru8.internetofthings.ibmcloud.com/dashboard/ */
@@ -63,8 +64,9 @@ char msg[50];
 int value = 0;
 
 void setup() {
-  pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   Serial.begin(115200);
+  pinMode(21, OUTPUT);
+  pinMode(18, OUTPUT);
   setup_wifi();
   client.setServer(mqtt_server, MQTT_PORT);
   client.setCallback(callback);
@@ -92,23 +94,38 @@ void setup_wifi() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
+  //Serial.print("Message arrived [");
+  //Serial.print(topic);
+  //Serial.print("] ");
+  String input = "";
   for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
+    //Serial.print((char)payload[i]);
+    input+=(char)payload[i];
   }
   Serial.println();
 
-  // Switch on the LED if an 1 was received as first character
-  if ((char)payload[0] == '1') {
-    digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    // but actually the LED is on; this is because
-    // it is acive low on the ESP-01)
-  } else {
-    digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
-  }
+  StaticJsonDocument<200> doc;
 
+  DeserializationError error = deserializeJson(doc, input);
+
+  const int valve = doc["d"]["valve"];
+  
+  //Serial.println("Valve: ");
+  //Serial.print(valve);
+
+  if (valve == 1) {
+    //Serial.println("OPENING VALVE 1");
+    digitalWrite(21, HIGH);
+    delay(1000);            // waits for a second
+    digitalWrite(21, LOW);  // sets the digital pin 13 off
+  }
+  if (valve == 2) {
+    //Serial.println("OPENING VALVE 2");
+    digitalWrite(18, HIGH);
+    delay(1000);
+    digitalWrite(18, LOW);
+  }
+  Serial.println();
 }
 
 void reconnect() {
@@ -139,7 +156,6 @@ void loop() {
 
     i++;
     
-    Serial.println("Button Pressed");
     String payload = "{ \"d\" : {";
     payload += "\"ph-sensor-1\":";
     String buf = String(i);
@@ -154,6 +170,7 @@ void loop() {
     } else {
       Serial.println("Publish failed");
     }
+    
     delay(2000);
 
     if(i == 14)
