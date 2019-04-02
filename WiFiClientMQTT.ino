@@ -23,13 +23,17 @@
 
 */
 
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 #include <PubSubClient.h>
 
 // Watson IoT connection details
-#define MQTT_HOST "<YOURORG>.messaging.internetofthings.ibmcloud.com"
+/* https://cfbru8.internetofthings.ibmcloud.com/dashboard/ */
+/* # Node red dashboard: */
+/* https://ucll-team1.eu-gb.mybluemix.net/ui/#!/0 */
+
+#define MQTT_HOST "cfbru8.messaging.internetofthings.ibmcloud.com"
 #define MQTT_PORT 1883
-#define MQTT_DEVICEID "d:<YOURORG>:ESP8266:ESPButton"
+#define MQTT_DEVICEID "d:cfbru8:ESP32:arduino"
 #define MQTT_USER "use-token-auth"
 #define MQTT_TOKEN "secrettoken"
 #define MQTT_TOPIC "iot-2/evt/status/fmt/json"
