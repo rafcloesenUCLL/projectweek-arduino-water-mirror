@@ -70,6 +70,6 @@ double avergearray(int* arr, int number){
 
 
 double convertVoltageToPh(double volt) {
-  double ph = 0.00557 * volt - 1.672;
+  double ph = 1.13485 * volt - 5.0778;
   return ph;
 }
