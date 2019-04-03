@@ -40,6 +40,8 @@ int value = 0;
 
 void setup() {
   Serial.begin(115200);
+
+  // setup for phmeter
   pinMode(21, OUTPUT);
   pinMode(18, OUTPUT);
 
@@ -137,9 +139,9 @@ void loop() {
   }
   client.loop();
 
-    float ph1 = read_ph();
-    float product1 = read_product(1);
-    float product2 = read_product(2);
+    double ph1 = read_ph();
+    double product1 = read_product_percentage(0);
+    double product2 = read_product_percentage(1);
 
     String payload = "{ \"d\" : {";
 
@@ -157,6 +159,12 @@ void loop() {
     payload += "\"product2\":\"";
     payload += String(product2);
 
+    payload += ",";
+
+    payload += "\"ip\":\"";
+    payload += WiFi.localIP().toString();
+    payload += "\"";
+
     payload += "}}";
     Serial.println(payload);
 
@@ -167,11 +175,4 @@ void loop() {
     }
     
     delay(2000);
-    
-  /* buttonState = digitalRead(button); */ 
-  /* if (buttonState == HIGH) { */
-  /*   delay(500); */
-  /* } */
-  /* else { */
-  /*  } */
 }
