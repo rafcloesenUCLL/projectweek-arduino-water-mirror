@@ -1,5 +1,0 @@
-Organization ID: cfbru8
-Device Type: ESP32
-Device ID: arduino
-Authentication Method: use-token-auth
-Authentication Token: oQx@oa5jVACX35lwF&

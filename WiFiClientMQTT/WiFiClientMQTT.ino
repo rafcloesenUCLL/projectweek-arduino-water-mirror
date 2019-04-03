@@ -47,7 +47,7 @@
 #define MQTT_USER "use-token-auth"
 #define MQTT_TOKEN "oQx@oa5jVACX35lwF&"
 #define MQTT_TOPIC "iot-2/evt/status/fmt/json"
-#define MQTT_TOPIC_DISPLAY "iot-2/cmd/update/fmt/json"
+#define MQTT_TOPIC_DISPLAY "iot-2/cmd/phmessage/fmt/json"
 
 // Update these with values suitable for your network.
 
@@ -146,7 +146,6 @@ void reconnect() {
   }
 }
 
-int i = 0;
 void loop() {
 
   if (!client.connected()) {
@@ -154,11 +153,10 @@ void loop() {
   }
   client.loop();
 
-    i++;
-    
+    float ph1 = read_ph();
     String payload = "{ \"d\" : {";
     payload += "\"ph-sensor-1\":";
-    String buf = String(i);
+    String buf = String(ph1);
     payload += buf; 
     payload += ",";
     payload += "\"Local IP\":\""; payload += WiFi.localIP().toString(); payload += "\"";
@@ -172,12 +170,7 @@ void loop() {
     }
     
     delay(2000);
-
-    if(i == 14)
-    {
-      i = 0;
-    }
-
+    
   /* buttonState = digitalRead(button); */ 
   /* if (buttonState == HIGH) { */
   /*   delay(500); */

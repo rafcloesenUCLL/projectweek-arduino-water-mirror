@@ -1,47 +1,31 @@
-int measurements, counter;
 
 #define In 34
 
 #define Offset 0.00            //deviation compensate
 #define LED 13
-#define samplingInterval 20
-#define printInterval 800
 #define ArrayLenth  40    //times of collection
 int pHArray[ArrayLenth];   //Store the average value of the sensor feedback
 int pHArrayIndex=0; 
 
-
-void setup() {
-  // put your setup code here, to run once:
-
-  Serial.begin(9600); //?
-  Serial.print("ph meter start");
-}
-
-void loop() {  
+double read_ph() {  
   //Serial.print(analogRead(In));
 
-  static unsigned long samplingTime = millis();
-  static unsigned long printTime = millis();
-  static float pHValue,voltage;
+  static double pHValue,voltage;
   //Serial.println(analogRead(In));
   
-  if(millis()-samplingTime > samplingInterval)
-  {
       pHArray[pHArrayIndex++]=analogRead(In);
       if(pHArrayIndex==ArrayLenth)pHArrayIndex=0;
       voltage = avergearray(pHArray, ArrayLenth)*5.0/1024;
       pHValue = convertVoltageToPh(analogRead(In));//3.5*voltage+Offset;
-      samplingTime=millis();
-  }
-  if(millis() - printTime > printInterval)   //Every 800 milliseconds, print a numerical, convert the state of the LED indicator
-  {
+      
+ 
     Serial.print("Voltage:");
     Serial.print(voltage,2);
     Serial.print("pH value: ");
     Serial.println(pHValue,2);
-    printTime=millis();
-  }
+
+    return pHValue;
+    
 }
 
 double avergearray(int* arr, int number){
