@@ -16,7 +16,7 @@ double read_ph() {
       pHArray[pHArrayIndex++]=analogRead(In);
       if(pHArrayIndex==ArrayLenth)pHArrayIndex=0;
       voltage = avergearray(pHArray, ArrayLenth)*5.0/1024;
-      pHValue = convertVoltageToPh(analogRead(In));//3.5*voltage+Offset;
+      pHValue = convertVoltageToPh(voltage);
       
  
     Serial.print("Voltage:");
