@@ -29,8 +29,9 @@
 const char* ssid = "ucll-projectweek-IoT";
 const char* password = "Foo4aiHa";
 const char* mqtt_server = MQTT_HOST;
-const int button = 0;
-int buttonState = 0;
+
+#define VALVEPIN 16
+int product_release = 1;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -93,19 +94,26 @@ void callback(char* topic, byte* payload, unsigned int length) {
   //Serial.println("Valve: ");
   //Serial.print(valve);
 
-  if (valve == 1) {
+  if (valve == 1 && product_release > 0) {
     //Serial.println("OPENING VALVE 1");
-    digitalWrite(21, HIGH);
-    delay(1000);            // waits for a second
-    digitalWrite(21, LOW);  // sets the digital pin 13 off
+    //digitalWrite(21, HIGH);
+    //delay(1000);            // waits for a second
+    //digitalWrite(21, LOW);  // sets the digital pin 13 off
+
+    // open valve
+    digitalWrite(VALVEPIN, HIGH);
+    delay(5000);
+    digitalWrite(VALVEPIN, LOW);
+
+    product_release = -20;
   }
-  if (valve == 2) {
-    //Serial.println("OPENING VALVE 2");
-    digitalWrite(18, HIGH);
-    delay(1000);
-    digitalWrite(18, LOW);
-  }
-  Serial.println();
+  /* if (valve == 2) { */
+  /*   //Serial.println("OPENING VALVE 2"); */
+  /*   digitalWrite(18, HIGH); */
+  /*   delay(1000); */
+  /*   digitalWrite(18, LOW); */
+  /* } */
+  /* Serial.println(); */
 }
 
 void reconnect() {
@@ -126,11 +134,11 @@ void reconnect() {
   }
 }
 
-float read_product(int product_id)
-{
-	if(product_id == 1) return 0.1;
-	else return 0.9;
-}
+//float read_product(int product_id)
+//{
+//	if(product_id == 1) return 0.1;
+//	else return 0.9;
+//}
 
 void loop() {
 
@@ -138,6 +146,9 @@ void loop() {
     reconnect();
   }
   client.loop();
+
+    if(product_release < 1)
+    	product_release++; 
 
     double ph1 = read_ph();
     double product1 = read_product_percentage(0);
