@@ -143,7 +143,7 @@ void loop() {
 
     String payload = "{ \"d\" : {";
 
-    payload += "\"ph-sensor\":";
+    payload += "\"ph\":";
     payload += String(ph1);
 
     payload += ",";
