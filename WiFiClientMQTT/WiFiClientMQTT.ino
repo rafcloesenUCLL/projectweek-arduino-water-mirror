@@ -42,6 +42,9 @@ void setup() {
   Serial.begin(115200);
   pinMode(21, OUTPUT);
   pinMode(18, OUTPUT);
+
+  distance_setup();
+
   setup_wifi();
   client.setServer(mqtt_server, MQTT_PORT);
   client.setCallback(callback);
@@ -121,6 +124,12 @@ void reconnect() {
   }
 }
 
+float read_product(int product_id)
+{
+	if(product_id == 1) return 0.1;
+	else return 0.9;
+}
+
 void loop() {
 
   if (!client.connected()) {
@@ -129,12 +138,25 @@ void loop() {
   client.loop();
 
     float ph1 = read_ph();
+    float product1 = read_product(1);
+    float product2 = read_product(2);
+
     String payload = "{ \"d\" : {";
-    payload += "\"ph-sensor-1\":";
-    String buf = String(ph1);
-    payload += buf; 
+
+    payload += "\"ph-sensor\":";
+    payload += String(ph1);
+
     payload += ",";
-    payload += "\"Local IP\":\""; payload += WiFi.localIP().toString(); payload += "\"";
+
+    payload += "\"product1\":\"";
+    payload += String(product1);
+    payload += "\"";
+
+    payload += ",";
+
+    payload += "\"product2\":\"";
+    payload += String(product2);
+
     payload += "}}";
     Serial.println(payload);
 
