@@ -1,6 +1,6 @@
-#Internet of Things platform setup
+# Internet of Things platform setup
 
-###Create an IBMid on the IBM CLOUD
+### Create an IBMid on the IBM CLOUD
 In order to work in the IBM Cloud (formerly known as Bluemix) you need to register and get an IBMid. 
 If you already have an IBMid, just log in to the IBM Cloud. 
 Else, follow next steps to create one. 
@@ -9,11 +9,11 @@ Else, follow next steps to create one.
 3.Follow the steps to create you IBMid 
 You now can use the IBM Cloud. Lots of the available services has a free tier, so you can now start experimenting for free
 
-###Deploy IoT platform starter service
+### Deploy IoT platform starter service
 The IoT Platform Starterservice helps you deploy SDK for Node.js as your Application, with Watson IoT Platform service and the Cloudant NoSQL DB service binded to your IoT Application. Here, the Device and Gateway specific IoT events shall be managed and handled on the IoT Platform, while the Cloudant NoSQL DB actsas the default DB for your IoT requirements. Node-RED shall be the default User Interface and is considered one of the fastest means to begin your IoT Application development
 Following set of steps details out on the deployment of the IoT Platform Starterservice: 
 1. Log into IBM Cloud (https://cloud.ibm.com/login) with your IBMid and access the Catalog. 
-2.Choose to click on the Internet of Things Platform Starterservice. This can be found in the “Starter Kits” section of the catalog.
+2.Choose to click on the Internet of Things Platform Starterservice. This can be found in the 'Starter Kits' section of the catalog.
 3.Provide auniqueApp Name (e.g. My-initials-Workshop), which shall be the Host name for your application, and keep the default values for Domain, Location, Organization and Space.
 4.Keep the default plans for SDK for Node.js, Cloudant NoSQL DB and IoT Platform. 
 5.Click on Create, provided on the bottom-right corner of the screen, to go ahead and deploy the Starter service 
