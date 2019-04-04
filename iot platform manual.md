@@ -21,4 +21,67 @@ Following set of steps details out on the deployment of the IoT Platform Starter
 7. Click the Hamburger-menu on the top left corner and select Resource list. 
 8. You should see your application with an Up & Running status (Green dot) along the IoT Platform Service and the Cloudant database. Note: if the application is not Starting or Running, start it manually using the three-dots-menu on the right. 
 9. Click on the application name to open the information page on IBM Cloud. Examine the menus on the left. 
-10. On the Overview page click on Visit App URL to browse to the Node-RED flow editor that you use to create your application. 
+
+# IBM Watson and devices
+### IBM Watson
+We will now create some virtual devices in the IBM Watson application. These devices will represent the Arduinos we use in our pool device. The physical arduino will send messages to the virtual devices on Watson, the devices on watson will then send them to the Node-Red platorm (more info about this later)
+
+Follow these steps to launch the Watson platform:
+1. Go to the IBM Cloud dashboard if you aren't here already.
+2. Within the Dashboard find the findthe Internet of Things Platform service listed under “Cloud Foundry Services”. The name will be different from the one in this screenshot. Click on it to open the main page
+3. Observe the Welcome page click on Launchbutton to enter into the IBM Watson IoT Platform organization space.
+4. Observe the right top corner of the page, where you’ll find the six character Organization ID that is created for you to identify your instance of the Watson IoT Platform service. Here you can add, connect and manage your IoT devices. __write this id down somewhere__
+
+### Creating devices
+Create Device Type Each device connected to the IBM Watson IoTPlatform is associated with a device type. Device types are intended to be groups of devices which share common characteristics. So in order to add devices in IBM Watson IoT Platform, one need to create a device type.Following are the instructions for creating a Device Type:
+1. In the IBM Watson IoT Platform dashboard, click DEVICES menu. 
+2. Select theDevice Types tab, then click on the Add Device Type button. 
+3. Observe that there are two options provided now, namely Device type and Gateway type. Select 'Device type'.
+4. For the device type, enter __ESP32__. Optionally add a description, then click Next.
+5. Observe that a template page is given where you can select and define one or more attributes. All of these attributes are optional. They will be used as a template for new devices that are assigned this device type. Attributes that you do not define may still be edited individually later when you add the device. Define any attributes if you want, then click Done.
+
+We have successfully create a device type in IBM Watson.
+Now we need to create a device that matches the device type.
+Follow these steps:
+1. In the IBM Watson IoT Platform dashboard choose the Devices menu on the left, click the Browse tab and then Add Device button.
+2. Choose the device type "ESP32" that we created in the last step. For device id enter "arduino", then click Next.
+3. In the Device Information page you can enter more information about your device. Click Next.
+4. In the next page, you can either add your own authentication token, or allow the IBM Watson IoT Platform to generate a token for you. The IBM Watson IoT Platform generated token will be 18 characters long and will contain a mix of alphanumeric characters and symbols. The token will be returned to you at the end of the registration process. In case if you want to add your own token, enter the token, then click Next.
+5. you will be given a summary page to verify the details before adding the device to IBM Watson IoT Platform. Verify and click Done.
+6. This last page will show all the device information. __Write all this data down somewhere, Especially the token!__
+
+We have now successfuly created a registered device!
+(When configuring the mqqt connection on the arduino you will need the token. )
+
+# Using node red with the IBM device
+
+We are almost finished, all that is left is creating a node-red flow that will use our arduino to create a nice dashboard and save data in a database.
+
+### Node Red flow
+
+Follow these steps to import the node-red flow we have made for you:
+1. Browse back to the IBM cloud dashboard. (hamburger-menu on the top left corner and select Dashboard).
+2. Click on the application name to open the information page on IBM Cloud. Examine the menus on the left.
+3. On the Overview page click on VisitApp URLto browse to the Node-RED flow editor that you use to create your application.  
+4. As the Application launches, it prompts you to complete couple of steps: Secure the Node-RED Editorand optionally, allows you to Browse available nodes.
+  Click on Next to continue.
+  To secure your Node-RED Editor and the flows associated with it, configure the credentials with a custom User ID and Password of your choice. Optionally, choose to grant access public in Read-Only mode or grant Write permission to all.
+  Click on Next to continue.
+5. The last step in the configuration process summarizes your selections & choices. Click on Finishto complete the Application configuration.
+6. The Configuration choices made shall take couple of moments to be applied to your current Application environment.
+7. Post applying your Configuration settings, you are now good to start with your Node-RED editor. Click on the Go to your Node-RED flow editor to launch the editor.
+
+Before you can import the flow we made in the editor you will need to import some 'node palletes'.
+
+
+In the node red editor it is very simple to import our flow.  
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red.png "Importing our flow")
+
+In the window that pops up, copy and paste the following json text:
+```
+{
+	"json": "TODO";
+}
+```
+
+The flow is now imported. On the top-right of the page 'click' deploy. Node red is now running!
