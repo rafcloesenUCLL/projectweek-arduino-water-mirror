@@ -6,7 +6,7 @@
 
 ### afstandsmeter
 
-![Afstandsmeter](https://raw.githubusercontent.com/emildekeyser/projectweek-arduino-water/master/img/afstand.jpg)
+![Afstandsmeter](/img/afstand.jpg)
 
 
 
