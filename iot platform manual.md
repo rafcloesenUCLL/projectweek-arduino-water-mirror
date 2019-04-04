@@ -156,7 +156,8 @@ You can have node-red send the emails to your actual email adress, however you p
 ![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red9.png "Configure email nodes")
 
 
-The flow is now imported. On the top-right of the page 'click' deploy. Node red is now running!
+__Make sure you configured both the email nodes__
+When everything is ready, you can deploy the flow by clicking 'deploy' in the top right corner. Node red is now running!
 
 If you want you can play around with some of the nodes to see what they do.
 For more info on node-red and what all the different nodes and flows do/mean, you can visit their site [here](https://nodered.org)
