@@ -53,6 +53,40 @@ Follow these steps:
 We have now successfuly created a registered device!
 (When configuring the mqqt connection on the arduino you will need the token. )
 
+# Cloudant database
+
+We will use the cloudant database to store all the data our arduino measures.
+Cloudant is a CouchDb database that doesnt use SQL to store data, but uses search indexes and a different query language to retrieve data.
+Don't worry, you do not need to know anything about this, we will just setup the database. The importing and exporing of the data is done automatically by our node-red flow.
+
+### Creating the Cloudant database
+
+Follow these steps to setup the cloudant DB:
+1. Browse back to the IBM cloud dashboard. (hamburger-menu on the top left corner and select Dashboard).
+2. On the dashboard, click on  'Cloud foundry services'.
+3. Under 'Services' There should be a cloudand-pz listed, click on it.
+4. On the next page, click on 'Launch cloudant dashboard'.
+5. When you reached the dashboard, click on 'Create database' in the top right corner. Name this database 'phmetingen'.
+6. When the database appears in the list of databases, click on the one we just created.
+7. Next, create a new search index in this database.
+
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red6.png "Create search index")
+
+8. Copy the following settings for the search index:
+
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red7.png "Create search index")
+
+```
+function (doc) {
+   if (doc.timestamp) {
+     index("searchTime", doc.timestamp, {"store": true, "facet":true}); 
+    }
+}
+```
+
+The database is now ready to be used!
+
+
 # Using node red with the IBM device
 
 We are almost finished, all that is left is creating a node-red flow that will use our arduino to create a nice dashboard and save data in a database.
@@ -71,8 +105,32 @@ Follow these steps to import the node-red flow we have made for you:
 6. The Configuration choices made shall take couple of moments to be applied to your current Application environment.
 7. Post applying your Configuration settings, you are now good to start with your Node-RED editor. Click on the Go to your Node-RED flow editor to launch the editor.
 
-Before you can import the flow we made in the editor you will need to import some 'node palletes'.
+Before you can import the flow we made in the editor you will need to import a 'node palette'.
 
+Go to 'manage palette' as shown here:
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red2.png "manage palette")
+
+Then search for the dashboard plugin and install it:
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red3.png "Importing our flow")
+
+Here is a list of all node palettes that should be installed: 
+(Make sure these are installed or the flow will not work correctly)
+
+| Palettes      |
+| ------------- |
+| node-red      | 
+| node-red-bluemix-nodes      | 
+| node-red-contrib-bluemix-hdfs |
+| node-red-contrib-email-out |
+| node-red-contrib-ibm-wiotp-device-ops |
+| node-red-contrib-ibmpush |
+| node-red-contrib-iot-virtual-device |
+| node-red-contrib-scx-ibmiotapp |
+| node-red-dashboard |
+| node-red-node-cf-cloudant |
+| node-red-node-watson |  
+
+When this is finished you can import our flow.
 
 In the node red editor it is very simple to import our flow.  
 ![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red.png "Importing our flow")
@@ -85,3 +143,23 @@ In the window that pops up, copy and paste the following json text:
 ```
 
 The flow is now imported. On the top-right of the page 'click' deploy. Node red is now running!
+
+If you want you can play around with some of the nodes to see what they do.
+For more info on node-red and what all the different nodes and flows do/mean, you can visit their site [here](https://nodered.org)
+
+
+### Final product
+
+The Internet side of our IoT project is now finished.
+If you have also configured the arduino and it is running, you are done!
+
+To view the dashboard that node-red generated, go here:
+
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red4.png "Viewing the dashboard")
+
+If you cannot find this link make sure the node-red-dashboard plugin is installed and that you have deployed the node-red flow.
+
+The result should be this:
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red5.png "Dashboard result")
+
+Everything displayed here comes directly from the arduino.
