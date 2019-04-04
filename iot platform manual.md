@@ -142,6 +142,20 @@ In the window that pops up, copy and paste the following json text:
 }
 ```
 
+Before we can deploy the flow, you need to configure the email nodes.
+
+Double click on them to configure them, a window should pop-up:
+
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red8.png "Configure email nodes")
+
+Fill in the node as follows:
+
+We suggest you create a fake email adress to use for this project. Creating a gmail account takes less than 5 minutes and is very easy.
+You can have node-red send the emails to your actual email adress, however you probably dont want to give node-red access to log in to your email.
+
+![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red9.png "Configure email nodes")
+
+
 The flow is now imported. On the top-right of the page 'click' deploy. Node red is now running!
 
 If you want you can play around with some of the nodes to see what they do.
@@ -159,7 +173,7 @@ To view the dashboard that node-red generated, go here:
 
 If you cannot find this link make sure the node-red-dashboard plugin is installed and that you have deployed the node-red flow.
 
-The result should be this:
+The result should look something this:
 ![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red5.png "Dashboard result")
 
 Everything displayed here comes directly from the arduino.
