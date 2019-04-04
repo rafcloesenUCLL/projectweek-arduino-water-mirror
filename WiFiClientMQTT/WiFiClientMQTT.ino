@@ -45,6 +45,8 @@ void setup() {
   // setup for phmeter
   pinMode(21, OUTPUT);
   pinMode(18, OUTPUT);
+  pinMode(VALVEPIN, OUTPUT);
+
 
   distance_setup();
 
@@ -91,11 +93,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   const int valve = doc["d"]["valve"];
   
-  //Serial.println("Valve: ");
-  //Serial.print(valve);
+  Serial.println("Valve: ");
+  Serial.print(valve);
 
-  if (valve == 1 && product_release > 0) {
-    //Serial.println("OPENING VALVE 1");
+  if ((valve == 1 || valve == 2) && product_release > 0) {
+    Serial.println("OPENING VALVE 1 or 2");
     //digitalWrite(21, HIGH);
     //delay(1000);            // waits for a second
     //digitalWrite(21, LOW);  // sets the digital pin 13 off
@@ -154,6 +156,10 @@ void loop() {
     double product1 = read_product_percentage(0);
     double product2 = read_product_percentage(1);
 
+//    double ph1 = 10;
+//    double product1 = 0.1;
+//    double product2 = 0.9;
+
     String payload = "{ \"d\" : {";
 
     payload += "\"ph\":";
@@ -161,13 +167,12 @@ void loop() {
 
     payload += ",";
 
-    payload += "\"product1\":\"";
+    payload += "\"product1\":";
     payload += String(product1);
-    payload += "\"";
 
     payload += ",";
 
-    payload += "\"product2\":\"";
+    payload += "\"product2\":";
     payload += String(product2);
 
     payload += ",";
