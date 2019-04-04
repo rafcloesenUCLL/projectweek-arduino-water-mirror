@@ -154,7 +154,7 @@ void loop() {
 
     double ph1 = read_ph();
     double product1 = read_product_percentage(0);
-    double product2 = read_product_percentage(1);
+    //double product2 = read_product_percentage(1);
 
 //    double ph1 = 10;
 //    double product1 = 0.1;
@@ -172,10 +172,10 @@ void loop() {
 
     payload += ",";
 
-    payload += "\"product2\":";
-    payload += String(product2);
-
-    payload += ",";
+//    payload += "\"product2\":";
+//    payload += String(product2);
+//
+//    payload += ",";
 
     payload += "\"ip\":\"";
     payload += WiFi.localIP().toString();
