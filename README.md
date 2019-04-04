@@ -2,9 +2,9 @@
 
 ## links
 
-* IBM Watson: https://cfbru8.internetofthings.ibmcloud.com/dashboard/
 * Node red dashboard: https://ucll-team1.eu-gb.mybluemix.net/ui/#!/0
 * explanation about the [phmeter:] (/blob/master/phmeter.md)
+* explanation and setting up the IoT platform: <https://github.com/emildekeyser/projectweek-arduino-water/blob/master/iot%20platform%20manual.md>
 
 ## Arduino IDE Setup
 
