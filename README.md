@@ -4,8 +4,9 @@
 
 * IBM Watson: https://cfbru8.internetofthings.ibmcloud.com/dashboard/
 * Node red dashboard: https://ucll-team1.eu-gb.mybluemix.net/ui/#!/0
+* explanation about the [phmeter:] (/blob/master/phmeter.md)
 
-## 1. Arduino IDE Setup
+## Arduino IDE Setup
 
 1. Download Arduino IDE
 2. Copy esp32 board manager link

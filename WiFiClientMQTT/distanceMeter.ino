@@ -1,7 +1,7 @@
 unsigned int TRIG_PIN[2];
 unsigned int ECHO_PIN[2];
 
-double MAX_DISTANCE = 35;
+double MAX_DISTANCE = 17;
 
 void distance_setup() {
   TRIG_PIN[0] = 13;
