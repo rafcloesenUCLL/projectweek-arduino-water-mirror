@@ -3,8 +3,8 @@
 ## links
 
 * Node red dashboard: https://ucll-team1.eu-gb.mybluemix.net/ui/#!/0
-* explanation about the [phmeter:] (/phmeter.md)
-* explanation and setting up the IoT platform: [IoT platform] (iot%20platform%20manual.md)
+* explanation about the [phmeter:] (/blob/master/phmeter.md)
+* explanation and setting up the IoT platform: [IoT platform] (/blob/master/iot%20platform%20manual.md)
 
 ## Arduino IDE Setup
 
