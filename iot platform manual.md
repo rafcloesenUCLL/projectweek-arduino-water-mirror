@@ -70,11 +70,11 @@ Follow these steps to setup the cloudant DB:
 6. When the database appears in the list of databases, click on the one we just created.
 7. Next, create a new search index in this database.
 
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red6.png "Create search index")
+![alt text](/img/node-red6.png "Create search index")
 
 8. Copy the following settings for the search index:
 
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red7.png "Create search index")
+![alt text](/img/node-red7.png "Create search index")
 
 ```
 function (doc) {
@@ -108,10 +108,10 @@ Follow these steps to import the node-red flow we have made for you:
 Before you can import the flow we made in the editor you will need to import a 'node palette'.
 
 Go to 'manage palette' as shown here:
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red2.png "manage palette")
+![alt text](/img/node-red2.png "manage palette")
 
 Then search for the dashboard plugin and install it:
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red3.png "Importing our flow")
+![alt text](/img/node-red3.png "Importing our flow")
 
 Here is a list of all node palettes that should be installed: 
 (Make sure these are installed or the flow will not work correctly)
@@ -133,7 +133,7 @@ Here is a list of all node palettes that should be installed:
 When this is finished you can import our flow.
 
 In the node red editor it is very simple to import our flow.  
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red.png "Importing our flow")
+![alt text](/img/node-red.png "Importing our flow")
 
 In the window that pops up, copy and paste the following json text:
 ```
@@ -144,14 +144,14 @@ Before we can deploy the flow, you need to configure the email nodes.
 
 Double click on them to configure them, a window should pop-up:
 
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red8.png "Configure email nodes")
+![alt text](/img/node-red8.png "Configure email nodes")
 
 Fill in the node as follows:
 
 We suggest you create a fake email adress to use for this project. Creating a gmail account takes less than 5 minutes and is very easy.
 You can have node-red send the emails to your actual email adress, however you probably dont want to give node-red access to log in to your email.
 
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red9.png "Configure email nodes")
+![alt text](/img/node-red9.png "Configure email nodes")
 
 
 __Make sure you configured both the email nodes__
@@ -168,11 +168,11 @@ If you have also configured the arduino and it is running, you are done!
 
 To view the dashboard that node-red generated, go here:
 
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red4.png "Viewing the dashboard")
+![alt text](/img/node-red4.png "Viewing the dashboard")
 
 If you cannot find this link make sure the node-red-dashboard plugin is installed and that you have deployed the node-red flow.
 
 The result should look something this:
-![alt text](https://github.com/emildekeyser/projectweek-arduino-water/blob/master/img/node-red5.png "Dashboard result")
+![alt text](/img/node-red5.png "Dashboard result")
 
 Everything displayed here comes directly from the arduino.
